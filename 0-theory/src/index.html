@@ -1,5 +1,29 @@
+<style>
+    .scroll-container{
+        width: 300px;
+        height: 600px;
+        border: 1px solid black;
+        overflow: auto;
+        /* box-sizing: border-box; */
+    }
+
+    .scrolled-element{
+        width: 300px;
+        height: 200px;
+        border: 1px solid red;
+        box-sizing: border-box;
+    }
+</style>
 <div class="content-wrap">
     <div class="terminal">
         <pre></pre>
     </div>
+</div>
+<div class="scroll-container">
+    <div id="first" class="scrolled-element"></div>
+    <div class="scrolled-element"></div>
+    <div class="scrolled-element"></div>
+    <div class="scrolled-element"></div>
+    <div class="scrolled-element"></div>
+    <div class="scrolled-element"></div>
 </div>

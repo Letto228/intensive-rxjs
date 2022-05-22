@@ -1,31 +1,31 @@
-// import { fromEvent, merge, Observable, zip } from 'rxjs';
-// import { filter, map } from 'rxjs/operators';
-// import '../../assets/css/style.css';
+import { fromEvent, merge, Observable, zip } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import '../../assets/css/style.css';
 
-// function getX(source$: Observable<MouseEvent | TouchEvent>) {
-//     return source$.pipe(
-//         map(event => event instanceof MouseEvent
-//             ? event.clientX
-//             : event.changedTouches[0]!.clientX,
-//         ),
-//     )
-// }
+export function getX(source$: Observable<MouseEvent | TouchEvent>) {
+    return source$.pipe(
+        map(event => event instanceof MouseEvent
+            ? event.clientX
+            : event.changedTouches[0]!.clientX,
+        ),
+    )
+}
 
-// const up$ = merge(
-//     fromEvent<MouseEvent>(document, 'mouseup'),
-//     fromEvent<MouseEvent>(document, 'touchend'),
-// );
-// const down$ = merge(
-//     fromEvent<MouseEvent>(document, 'mousedown'),
-//     fromEvent<MouseEvent>(document, 'touchstart'),
-// );
+const up$ = merge(
+    fromEvent<MouseEvent>(document, 'mouseup'),
+    fromEvent<MouseEvent>(document, 'touchend'),
+);
+const down$ = merge(
+    fromEvent<MouseEvent>(document, 'mousedown'),
+    fromEvent<MouseEvent>(document, 'touchstart'),
+);
 
-// export const swipe$ = zip(getX(down$), getX(up$)).pipe(
-//     map(([start, end]) => start - end),
-//     filter(diff => diff !== 0),
-// )
+export const swipe$ = zip(getX(down$), getX(up$)).pipe(
+    map(([start, end]) => start - end),
+    filter(diff => diff !== 0),
+)
 
-// swipe$.subscribe(console.log);
+swipe$.subscribe(console.log);
 
 // import { fromEvent, merge, Observable, zip } from 'rxjs';
 // import { filter, map } from 'rxjs/operators';

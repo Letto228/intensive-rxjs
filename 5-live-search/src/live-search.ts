@@ -1,6 +1,6 @@
-import { fromEvent, Observable } from "rxjs";
+import { fromEvent, Observable, of } from "rxjs";
 import { ajax } from "rxjs/ajax";
-import { bufferCount, concatAll, debounceTime, distinctUntilChanged, filter, map, pluck, reduce, switchMap } from "rxjs/operators";
+import { bufferCount, catchError, concatAll, debounceTime, distinctUntilChanged, filter, map, pluck, reduce, switchMap } from "rxjs/operators";
 
 interface ICard {
     name: string;
@@ -35,7 +35,9 @@ export function liveSearch(
                     url: `https://api.github.com/search/repositories?q=${text}`,
                     crossDomain: true,
                 }).pipe(
-                    map(res => res.response.items)
+                    // catchError(() => of({response: {items: []}})),
+                    map(res => res.response.items),
+                    catchError(() => of([])),
                 )
             )
         ),

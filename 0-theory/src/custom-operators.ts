@@ -3,16 +3,16 @@ import { filter, map, tap } from 'rxjs/operators';
 import '../../assets/css/style.css';
 import { terminalLog } from '../../utils/log-in-terminal';
 
-function doNothing<T>(source$: Observable<T>): Observable<T> {
-    return source$;
-}
+// function doNothing<T>(source$: Observable<T>): Observable<T> {
+//     return source$;
+// }
 
-function toStub(_: Observable<unknown>): Observable<string> {
-    return new Observable(subscriber => {
-        subscriber.next('Stub');
-        subscriber.complete();
-    });
-}
+// function toStub(_: Observable<unknown>): Observable<string> {
+//     return new Observable(subscriber => {
+//         subscriber.next('Stub');
+//         subscriber.complete();
+//     });
+// }
 
 // function customMap(cb: any): (source$: Observable<any>) => Observable<any> {
 //     return function (source$: Observable<number>): Observable<number> {
@@ -62,35 +62,35 @@ function toStub(_: Observable<unknown>): Observable<string> {
 //     )
 // }
 
-class DoubleSubscriber extends Subscriber<number> {
-    next(value: number): void {
-        super.next(value * 2);
-    }
-}
+// class DoubleSubscriber extends Subscriber<number> {
+//     next(value: number): void {
+//         super.next(value * 2);
+//     }
+// }
 
-function double(source$: Observable<number>): Observable<number> {
-    return new Observable(subscriber => {
-        const sub = source$.subscribe(new DoubleSubscriber(subscriber))
+// function double(source$: Observable<number>): Observable<number> {
+//     return new Observable(subscriber => {
+//         const sub = source$.subscribe(new DoubleSubscriber(subscriber))
 
-        return () => {
-            sub.unsubscribe();
-        }
-    })
-}
+//         return () => {
+//             sub.unsubscribe();
+//         }
+//     })
+// }
 
-const sub = interval(1000)
-    .pipe(
-        tap(value => {
-            console.log(value);
-        }),
-        doNothing,
-        double, // interval(1000) -> new Observble(...)
-    )
-    .subscribe({
-        next: value => terminalLog(value),
-        complete: () => terminalLog('COMPLETE'),
-    });
+// const sub = interval(1000)
+//     .pipe(
+//         tap(value => {
+//             console.log(value);
+//         }),
+//         doNothing,
+//         double, // interval(1000) -> new Observble(...)
+//     )
+//     .subscribe({
+//         next: value => terminalLog(value),
+//         complete: () => terminalLog('COMPLETE'),
+//     });
 
-setTimeout(() => {
-    sub.unsubscribe();
-}, 3000)
+// setTimeout(() => {
+//     sub.unsubscribe();
+// }, 3000)
